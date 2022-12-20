@@ -9,12 +9,12 @@ if you want to and think there’s extra time, you can create authentication
     - Delete an option → (optional: An option can’t be deleted if it has even one vote given to it)
     - View a question with it’s options and all the votes given to it
 - Required Routes (Remember, in a real test, you won’t be given routes mostly)
-    - /questions/create (To create a question)
+    - /questions/create (To create a question)✅
     - /questions/:id/options/create (To add options to a specific question)
-    - /questions/:id/delete (To delete a question)
+    - /questions/:id/delete (To delete a question)✅
     - /options/:id/delete (To delete an option)
     - /options/:id/add_vote (To increment the count of votes)
-    - /questions/:id (To view a question and it’s options)
+    - /questions/:id (To view a question and it’s options)✅
 
 
 {

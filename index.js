@@ -1,10 +1,14 @@
-const express=require('express')
 const Port=3000
-
-const app=express()
+const express=require('express')
+const bodyParser=require('body-parser')
+const app=express();
+app.use(bodyParser.urlencoded({extended:true}))
+// app.use(express.urlencoded())
+// app.use(express.json())
+const db=require('./config/mongoose');
 
 // this is the initiator of the routing to different requests of the user with diff. url's
-app.get('/',require('./routes/index'));
+app.use('/',require('./routes/index'));
    
 
 
