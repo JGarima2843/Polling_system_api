@@ -9,7 +9,7 @@ module.exports.create=async function(req,res){
         // 
     })
     // it is for adding the vote to option of the id that is given by mongodb by update query and using the string interpolition
-    const updateopt=await Option.findByIdAndUpdate(opt._id,{"add_vote":`http://localhost:8000/options/${opt._id}/add_vote`})
+    const updateopt=await Option.findByIdAndUpdate(opt._id,{"add_vote":`https://localhost:3000/options/${opt._id}/add_vote`}) //yha pr problem h ⛔⛔
     // imprtant step to do o/w code updates will not be saved
     updateopt.save()
     // now searching the question so that we can append the option in question-->option array
@@ -29,10 +29,31 @@ module.exports.add_vote=async function(req,res){
     const opt=await Option.findByIdAndUpdate(req.params.id,{ $inc: { vote: 1 }})
     await opt.save();
     console.log(opt);
+    res.send(opt)
 }
 
-module.exports.delete=function(req,res){
+module.exports.delete=async function(req,res){
     // delete the id option 
+    console.log('id',req.params.id);
+    const opt=await Option.findById(req.params.id);
+    if(opt){
+        const quesId=opt.question;
+        const ques=await Question.findByIdAndUpdate(quesId,{$pull:{options:req.params.id}});
+        await Option.findByIdAndDelete(req.params.id)
+
+        console.log(ques);
+        res.send('option deleted')
+    }
+    else{
+        res.send('id not exists')
+    }
+
+
+
+
+
+
+
 
     
 }

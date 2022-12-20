@@ -1,4 +1,5 @@
 const Question=require('../models/questions')
+const Option=require('../models/options')
 
 module.exports.create=async function(req,res){
 //  in this the question are created
@@ -40,6 +41,7 @@ module.exports.deleteQues=async function(req,res){
         if(ques){
             // delete all the option ⁉️ of the option db having the question id as the req.params.id
             await Question.deleteOne(req.params.id).clone().catch(function(err){ console.log(err)})
+            await Option.deleteMany({question:req.params.id}).clone().catch(function(err){ console.log(err)})
                 res.send("ques deleted");
     
         }
