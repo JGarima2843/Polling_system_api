@@ -19,7 +19,7 @@ module.exports.create=async function(req,res){
 module.exports.showDetails=async function(req,res){
         console.log(req.params.id)
 
-        const ques=await Question.findById(req.params.id)
+        const ques=await Question.findById(req.params.id).populate('options')
         
 
         if(ques){
